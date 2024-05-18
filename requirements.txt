@@ -1,0 +1,4 @@
+crewai
+langchain-google-genai
+langchain_community==0.0.29
+crewai_tools==0.1.6
