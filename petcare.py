@@ -9,7 +9,7 @@ import streamlit as st
 from crewai import Crew, Process, Agent, Task
 from langchain_core.callbacks import BaseCallbackHandler
 from typing import TYPE_CHECKING, Any, Dict, Optional
-key = "AIzaSyAKEaaM7fWIErN3VbikjP_T5m0UfhBy5iE"
+key = st.secrets.API_KEY
 from langchain_google_genai import GoogleGenerativeAI
 llm = GoogleGenerativeAI(model='gemini-pro',google_api_key=key)
 
