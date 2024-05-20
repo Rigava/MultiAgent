@@ -1,2 +1,4 @@
-crewai==0.22.5
+crewai
 langchain-google-genai
+streamlit
+
