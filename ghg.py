@@ -72,7 +72,7 @@ if prompt := st.chat_input():
     task1 = Task(
       description=f"""Write a methodology to calculate the impact of {prompt}. """,
       agent=writer,
-      expected_output="Prepare a framework to calculate the impact under 300 words."
+      expected_output="Prepare a framework to calculate the impact under 1000 words."
     )
 
     task2 = Task(
