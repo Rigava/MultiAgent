@@ -11,7 +11,9 @@ from langchain_core.callbacks import BaseCallbackHandler
 from typing import TYPE_CHECKING, Any, Dict, Optional
 
 from langchain_google_genai import GoogleGenerativeAI
-llm = GoogleGenerativeAI(model='gemini-pro',google_api_key=st.secrets.API_KEY)
+# key =st.secrets.API_KEY
+key ="AIzaSyAKEaaM7fWIErN3VbikjP_T5m0UfhBy5iE"
+llm = GoogleGenerativeAI(model='gemini-pro',google_api_key=key)
 
 avators = {"Writer":"https://cdn-icons-png.flaticon.com/512/320/320336.png",
             "Reviewer":"https://cdn-icons-png.freepik.com/512/9408/9408201.png"}
@@ -50,7 +52,7 @@ reviewer = Agent(
     backstory = '''You're a meticulous analyst with a keen eye for detail. You're known for
                 your ability to turn complex data into clear and concise reports, making
                 it easy for others to understand and act on the information you provide..''',
-    goal="Build a compelling and engaging business case about the impact of researched regulation",
+    goal="Build a compelling and engaging business case about the impact of regulation",
     # tools=[]  # Optionally specify tools; defaults to an empty list
     llm=llm,
     callbacks=[MyCustomHandler("Reviewer")],
@@ -76,9 +78,10 @@ if prompt := st.chat_input():
     )
 
     task2 = Task(
-      description="""Using the insights provided, develop an engaging
-        post that highlights user of the impact of {prompt} regulation.
-        Your post should be informative yet accessible, catering to a maritime audience.""",
+      description="""Write an engaging blog that highlights user of the impact of 
+        {prompt} regulation.
+        Your blog should include the methodlogy, key equation and data sources. Highlight 
+        the potential game changing areas by giving example from maritime sector.""",
       agent=reviewer,
       expected_output="Builtin points about where need to be improved."
     )
