@@ -36,7 +36,7 @@ class MyCustomHandler(BaseCallbackHandler):
         st.session_state.messages.append({"role": self.agent_name, "content": outputs['output']})
         st.chat_message(self.agent_name, avatar=avators[self.agent_name]).write(outputs['output'])
 
-writer = Agent(
+researcher = Agent(
     role='Senior Researcher',
     backstory='''You work at a leading shipping company as a decarbonisation expert.
                 Your expertise lies in developing methodology to calculated GHG intensity.
@@ -47,7 +47,7 @@ writer = Agent(
     llm=llm,
     callbacks=[MyCustomHandler("Writer")],
 )
-reviewer = Agent(
+writer = Agent(
     role='Senior Writer',
     backstory = '''You're a meticulous analyst with a keen eye for detail. You're known for
                 your ability to turn complex data into clear and concise reports, making
@@ -73,22 +73,32 @@ if prompt := st.chat_input():
 
     task1 = Task(
       description=f"""Write a methodology to calculate the impact of {prompt}. """,
-      agent=writer,
+      agent=researcher,
       expected_output="Prepare a framework to calculate the impact under 1000 words."
     )
 
     task2 = Task(
-      description="""Write an engaging blog that highlights user of the impact of 
-        {prompt} regulation.
-        Your blog should include the methodlogy, key equation and data sources. Highlight 
-        the potential game changing areas by giving example from maritime sector.""",
-      agent=reviewer,
-      expected_output="Builtin points about where need to be improved."
+      description=(
+        "1. Use the content plan to craft a compelling "
+            "blog post on {topic}.\n"
+        "2. Incorporate SEO keywords naturally.\n"
+		"3. Sections/Subtitles are properly named "
+            "in an engaging manner.\n"
+        "4. Ensure the post is structured with an "
+            "engaging introduction, insightful body, "
+            "and a summarizing conclusion.\n"
+        "5. Proofread for grammatical errors and "
+            "alignment with the brand's voice.\n"
+    ),
+      agent=writer,
+      expected_output="A well-written blog post "
+        "in markdown format, ready for publication, "
+        "each section should have 2 or 3 paragraphs.",
     )
     # Establishing the crew with a hierarchical process
     project_crew = Crew(
         tasks=[task1, task2],  # Tasks to be delegated and executed under the manager's supervision
-        agents=[writer, reviewer],
+        agents=[researcher, writer],
         manager_llm=llm,
         process=Process.hierarchical  # Specifies the hierarchical management approach
     )
