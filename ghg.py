@@ -11,8 +11,7 @@ from langchain_core.callbacks import BaseCallbackHandler
 from typing import TYPE_CHECKING, Any, Dict, Optional
 
 from langchain_google_genai import GoogleGenerativeAI
-# key =st.secrets.API_KEY
-key ="AIzaSyAKEaaM7fWIErN3VbikjP_T5m0UfhBy5iE"
+key =st.secrets.API_KEY
 llm = GoogleGenerativeAI(model='gemini-pro',google_api_key=key)
 
 avators = {"Writer":"https://cdn-icons-png.flaticon.com/512/320/320336.png",
