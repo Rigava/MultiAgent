@@ -4,6 +4,6 @@ langchain-google-genai
 langchain
 faiss-cpu==1.7.4
 langchain_community==0.0.29
-ysqlite-binary==0.5.1.3380300
+ysqlite-binary==0.5.1
 pysqlite3==0.5.2
 
