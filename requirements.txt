@@ -2,5 +2,6 @@ crewai
 langchain-google-genai
 # streamlit==1.32.2
 langchain
+faiss-cpu==1.7.4
 
 
