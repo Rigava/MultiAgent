@@ -1,7 +1,7 @@
-crewai
+crewai==0.28.8
 langchain-google-genai
 # streamlit==1.32.2
 langchain
 faiss-cpu==1.7.4
-
+langchain_community==0.0.29
 
